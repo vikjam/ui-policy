@@ -5,15 +5,15 @@ import pandas as pd
 import numpy as np
 
 def parse_page(df):
-	variables = [0, 3, 4, 7, 10]
+	variables = [0, 3, 4, 7, 9, 10]
 	ui_policy = df.iloc[:, variables]
-	ui_policy.columns = ['state',     'min benefit', 'max benefit',
-	                     'num weeks', 'tax rates']
-	ui_policy = ui_policy[(ui_policy['num weeks'].notnull())]
-	ui_policy['min rate'] = ui_policy['tax rates'].str.split('\r', expand = True).get(0)
-	ui_policy['max rate'] = ui_policy['tax rates'].str.split('\r', expand = True).get(1)
-	ui_policy['new rate'] = ui_policy['tax rates'].str.split('\r', expand = True).get(2)
-	del ui_policy['tax rates']
+	ui_policy.columns = ['state_abbrev', 'min_wba', 'max_wba',
+	                     'benefit_weeks', 'taxable_wage_base', 'tax_rates']
+	ui_policy = ui_policy[(ui_policy['benefit_weeks'].notnull())]
+	ui_policy['min_tax_rate'] = ui_policy['tax_rates'].str.split('\r', expand = True).get(0)
+	ui_policy['max_tax_rate'] = ui_policy['tax_rates'].str.split('\r', expand = True).get(1)
+	ui_policy['new_tax_rate'] = ui_policy['tax_rates'].str.split('\r', expand = True).get(2)
+	del ui_policy['tax_rates']
 	ui_policy = ui_policy.apply(lambda x: x.str.replace(r'\r', ' '))
 	return(ui_policy)
 
