@@ -1,3 +1,6 @@
+# Ignore interim folder
+data/interim/
+
 # History files
 .Rhistory
 .Rapp.history
