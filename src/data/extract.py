@@ -50,7 +50,7 @@ def parse_ui_sig_provs(months, years):
                 print(f"{e}")
 
 months = ['January', 'July']
-years  = list(range(2010, 2018))
+years  = list(range(2006, 2018))
 
 parse_ui_sig_provs(months = months, years = years)
 
