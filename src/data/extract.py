@@ -1,5 +1,4 @@
 from tabula import read_pdf
-import re, json
 import pandas as pd
 import numpy as np
 
