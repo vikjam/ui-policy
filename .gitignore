@@ -1,5 +1,8 @@
-# Ignore interim folder
-data/
+# Ignore data folder
+data/csv/*
+!data/csv/.gitkeep
+data/pdf/*
+!data/pdf/.gitkeep
 
 # History files
 .Rhistory
