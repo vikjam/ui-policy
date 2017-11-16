@@ -26,7 +26,7 @@ program process_csv
 
     if "`industry_average_code'" == "" local industry_average_code "-9999"
     
-    cap special_processing_`year'
+    cap special_processing_`year', industry_average_code(`industry_average_code')
 
     replace benefit_weeks = "26" if benefit_weeks == "Up to 26"
     replace benefit_weeks = "26" if benefit_weeks == "16 or 26"
@@ -57,58 +57,67 @@ program process_csv
 end 
 
 program special_processing_2006
-    replace max_wba = "496" if state_abbrev == "WA"
+    syntax, industry_average_code(str)
+    replace max_wba          = "496" if state_abbrev == "WA"
     replace min_tax_rate     = "" if state_abbrev == "MN"
     replace max_tax_rate     = "" if state_abbrev == "MN"
     replace new_emp_tax_rate = "" if state_abbrev == "MN"
     replace new_emp_tax_rate = "" if state_abbrev == "PR"
     replace new_emp_tax_rate = "3.25" if state_abbrev == "WI"
-    replace new_emp_tax_rate = "999" if state_abbrev == "WA"
+    replace new_emp_tax_rate = "`industry_average_code'" if state_abbrev == "WA"
 end
 
 program special_processing_2007
-    replace max_wba = "521" if state_abbrev == "MN"
+    syntax, industry_average_code(str)
+    replace max_wba          = "521" if state_abbrev == "MN"
     * 3.25 or 3.40
     replace new_emp_tax_rate = "3.25" if state_abbrev == "WI"
-    replace new_emp_tax_rate = "999" if state_abbrev == "WA"
+    replace new_emp_tax_rate = "`industry_average_code'" if state_abbrev == "WA"
 end 
 
 program special_processing_2008
-    replace max_wba = "538" if state_abbrev == "MN"
+    syntax, industry_average_code(str)
+    replace max_wba          = "538" if state_abbrev == "MN"
     * 4.00 or 6.00
     replace new_emp_tax_rate = "4" if state_abbrev == "KS"
     * 3.25 or 3.40
     replace new_emp_tax_rate = "3.25" if state_abbrev == "WI"
-    replace new_emp_tax_rate = "999" if state_abbrev == "WA"
+    replace new_emp_tax_rate = "`industry_average_code'" if state_abbrev == "WA"
 end
 
 program special_processing_2012
-    replace max_wba = "648" if state_abbrev == "CT"
+    syntax, industry_average_code(str)
+    replace max_wba           = "648" if state_abbrev == "CT"
     replace taxable_wage_base = "19,600" if state_abbrev == "RI"
 end 
 
 program special_processing_2013
+    syntax, industry_average_code(str)
     replace taxable_wage_base = "20,200" if state_abbrev == "RI"
 end
 
 program special_processing_2014
+    syntax, industry_average_code(str)
     replace taxable_wage_base = "20,600" if state_abbrev == "RI"
-    replace max_tax_rate = "5.4" if state_abbrev == "NE"
+    replace max_tax_rate      = "5.4" if state_abbrev == "NE"
 end
 
 program special_processing_2015
+    syntax, industry_average_code(str)
     replace taxable_wage_base = "21,200" if state_abbrev == "RI"
-    replace max_tax_rate = "5.4" if state_abbrev == "NE"
+    replace max_tax_rate      = "5.4" if state_abbrev == "NE"
 end
 
 program special_processing_2016
+    syntax, industry_average_code(str)
     replace taxable_wage_base = "22,000" if state_abbrev == "RI"
-    replace max_tax_rate = "5.4" if state_abbrev == "NE"
+    replace max_tax_rate      = "5.4" if state_abbrev == "NE"
 end 
 
 program special_processing_2017
+    syntax, industry_average_code(str)
     replace taxable_wage_base = "22,400" if state_abbrev == "RI"
-    replace max_tax_rate = "5.4" if state_abbrev == "NE"
+    replace max_tax_rate      = "5.4" if state_abbrev == "NE"
 end 
 
 main
